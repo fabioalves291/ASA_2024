@@ -1,2 +1,3 @@
-# ASA_2024
-* teste
+# ASA_2024 - ADMINISTRAÇÃO DE SISTEMAS ABERTOS
+Repositorio criado para as práticas de ADMINISTRAÇÃO DE SISTEMAS ABERTOS.
+    
