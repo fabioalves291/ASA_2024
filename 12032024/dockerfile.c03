@@ -1,4 +1,6 @@
 
 FROM nginx:latest
 
-COPY c03.html /usr/share/nginx/html/index.html
+COPY projetoFS_code/home /usr/share/nginx/html/home
+COPY projetoFS_code/index.css /usr/share/nginx/html/
+COPY projetoFS_code/index.html /usr/share/nginx/html/
