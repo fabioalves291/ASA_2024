@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palavra Interativa</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        #word {
+            font-size: 4em;
+            animation: blink 1s step-start infinite;
+            transition: transform 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        #word:hover {
+            color: #61dafb;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="word">Container email</div>
+
+    <script>
+        const wordElement = document.getElementById('word');
+
+        wordElement.addEventListener('click', () => {
+            const colors = ['#ff6347', '#3cb371', '#1e90ff', '#ff69b4', '#ffa500'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            wordElement.style.color = randomColor;
+            wordElement.style.transform = `rotate(${Math.random() * 360}deg)`;
+        });
+    </script>
+</body>
+</html>

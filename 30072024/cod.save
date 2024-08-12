@@ -1,0 +1,17 @@
+sudo docker rmi 
+sudo docker rmisudo docker rmi
+sudo docker build -t c01 -f Dockerfile.c01 .
+sudo docker build -t c02 -f Dockerfile.c02 .
+
+sudo docker build -t c03 -f Dockerfile.c03 .
+
+sudo docker build -t proxy -f Dockerfile.proxy .
+sudo docker network create -d bridge asa-net
+
+sudo docker run -d --net=asa-net --name c01 c01
+
+sudo docker run -d --net=asa-net --name c02 c02
+
+sudo docker run -d --net=asa-net --name c03 c03
+
+sudo docker run -dp 80:80 --net=asa-net --name proxy proxy
