@@ -9,3 +9,12 @@ Repositório criado para as práticas de ADMINISTRAÇÃO DE SISTEMAS ABERTOS.
 
 - 09/07/2024    -   revisão
     * criação de 3 servidores e proxy.
+
+- 30/07/2024-12/08/2024
+    * criação de 3 servidores e proxy mais o servidor dns para estar a serviço do servidor proxy.
+    jfabio.asa.br -> zona
+    	www.jfabio.asa.br
+        mail.jfabio.asa.br
+    	ns.jfabio.asa.br
+ 	proxy.jfabio.asa.br
+
