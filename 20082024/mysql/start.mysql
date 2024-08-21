@@ -1,0 +1,9 @@
+docker network create wordpress-network
+docker run --name mysql-container \
+  --network wordpress-network \
+  -e MYSQL_ROOT_PASSWORD=password \
+  -e MYSQL_DATABASE=wordpress \
+  -e MYSQL_USER=user_wordpress \
+  -e MYSQL_PASSWORD=wordpress \
+  -v mysql-data:/var/lib/mysql \
+  -d mysql:5.7
