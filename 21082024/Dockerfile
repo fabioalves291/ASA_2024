@@ -42,5 +42,9 @@ RUN service apache2 restart
 # Exponha as portas necessárias
 EXPOSE 80
 
+# Definir volumes para persistência de dados
+VOLUME /var/lib/mysql
+VOLUME /var/www/html
+
 # Comando para iniciar o Apache e o MySQL
 CMD service mysql start && apache2ctl -D FOREGROUND

@@ -6,4 +6,5 @@ docker run --name mysql-container \
   -e MYSQL_USER=user_wordpress \
   -e MYSQL_PASSWORD=wordpress \
   -v mysql-data:/var/lib/mysql \
-  -d mysql:5.7
+  -d mysql:5.7 \
+  -p 3306:3306
