@@ -10,31 +10,27 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress_password
     volumes:
-      - db_data:/var/lib/mysql
+      - ./db_data:/var/lib/mysql
     networks:
-      - downloads_wordpress-net
+      - asa-net
 
   wordpress:
     image: wordpress:latest
     container_name: wordpress
-    ports:
-      - "8080:80"
+    #ports:8080:80
+      
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress_password
     volumes:
-      - wordpress_data:/var/www/html
+      - ./wordpress_data:/var/www/html
     depends_on:
       - db
     networks:
-      - downloads_wordpress-net
-
-volumes:
-  db_data:
-  wordpress_data:
+      - asa-net
 
 networks:
-  downloads_wordpress-net:
+  asa-net:
     external: true
