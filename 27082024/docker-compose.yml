@@ -12,13 +12,13 @@ services:
     volumes:
       - ./db_data:/var/lib/mysql
     networks:
-      - asa-net
+      - net
 
   wordpress:
     image: wordpress:latest
     container_name: wordpress
-    ports:
-      - "8080:80"
+    #ports:
+      #- 8080:80
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_NAME: wordpress
@@ -29,7 +29,7 @@ services:
     depends_on:
       - db
     networks:
-      - asa-net
+      - net
 
   nginx:
     image: nginx:latest
@@ -37,14 +37,14 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx:/etc/nginx/conf.d
+      - ./nginx:/etc/nginx
     depends_on:
       - wordpress
     networks:
-      - asa-net
+      - net
 
   bind9:
-    image: bind9:latest
+    image: ubuntu/bind9:latest
     container_name: bind9
     ports:
       - "53:53/udp"
@@ -52,8 +52,8 @@ services:
     volumes:
       - ./bind9:/etc/bind
     networks:
-      - asa-net
+      - net
 
 networks:
-  asa-net:
+  net:
     driver: bridge
