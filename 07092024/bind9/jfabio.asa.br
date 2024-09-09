@@ -1,0 +1,31 @@
+; db.example.com
+;
+; BIND data file for example.com
+;
+$TTL    604800
+@       IN      SOA     ns1.jfabio.asa.br. admin.example.com. (
+                        2024071801      ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+
+; Nameserver
+@       IN      NS      ns1.jfabio.asa.br.
+
+; A e AAAA records
+@       IN      A       127.0.0.1
+@       IN      AAAA    ::1
+ns1     IN      A       127.0.0.1
+
+; CNAMEs
+www     IN      CNAME   ns1
+proxy   IN      CNAME   ns1
+wordpress IN    CNAME   ns1
+web     IN      CNAME   ns1
+
+; Registro MX
+@       IN      MX      10 mail.jfabio.asa.br.
+
+; Apontando o servidor de e-mail para o IP correto
+mail    IN      A       127.0.0.1  ; Aqui deve ser o IP real do seu servidor de e-mail

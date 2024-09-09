@@ -1,0 +1,134 @@
+version: '3.8'
+
+services:
+  db-wordpress:
+    image: mysql:5.7
+    container_name: mysql-wordpress
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress_password
+    volumes:
+      - ./db_wordpress_data:/var/lib/mysql
+    networks:
+      - app-network
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    environment:
+      WORDPRESS_DB_HOST: db-wordpress:3306
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress_password
+    volumes:
+      - ./wordpress_data:/var/www/html
+    depends_on:
+      - db-wordpress
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx
+    depends_on:
+      - wordpress
+    networks:
+      - app-network
+
+  bind9:
+    image: ubuntu/bind9:latest
+    container_name: bind9
+    ports:
+      - "53:53/udp"
+      - "53:53/tcp"
+    volumes:
+      - ./bind9:/etc/bind
+    networks:
+      - app-network
+
+  postfix:
+    image: catatnight/postfix
+    container_name: postfix
+    ports:
+      - "25:25"
+      - "587:587"
+    environment:
+      - myhostname=mail.example.com
+      - mydomain=example.com
+      - smtpd_recipient_restrictions=permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
+      - smtpd_tls_security_level=may
+      - smtpd_use_tls=yes
+      - smtpd_tls_cert_file=/etc/ssl/certs/postfix.pem
+      - smtpd_tls_key_file=/etc/ssl/private/postfix.key
+    volumes:
+      - ./postfix:/etc/postfix
+      #- ./postfix/ssl:/etc/ssl/certs
+      #- ./postfix/ssl:/etc/ssl/private
+    networks:
+      - app-network
+
+  dovecot:
+    image: dovecot/dovecot:latest
+    container_name: dovecot
+    ports:
+      - "143:143"
+      - "993:993"
+    #volumes:
+    #  - ./dovecot:/etc/dovecot
+     # - ./dovecot/ssl:/etc/ssl/certs
+     # - ./dovecot/ssl:/etc/ssl/private
+    networks:
+      - app-network
+
+
+  mysql-postfixadmin:
+    image: mysql:5.7
+    container_name: mysql-postfixadmin
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: postfixadmin
+      MYSQL_USER: postfixuser
+      MYSQL_PASSWORD: postfixpassword
+    #ports:
+      #- "3306:3306"  # Expondo a porta do MySQL para o host
+    networks:
+      - app-network
+
+  postfixadmin:
+    image: postfixadmin
+    container_name: postfixadmin
+    environment:
+      DATABASE_TYPE: mysql
+      DATABASE_HOST: mysql-postfixadmin
+      DATABASE_NAME: postfixadmin
+      DATABASE_USER: postfixuser
+      DATABASE_PASSWORD: postfixpassword
+    
+      
+    ports:
+      - "8080:80"  # Expondo a porta do PostfixAdmin para o host
+    depends_on:
+      - mysql-postfixadmin
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+  net:
+    driver: bridge
+
+volumes:
+  adminpost:
+  db_wordpress_data:
+  wordpress_data:
+  db_postfixadmin_data:
+  postfix:
+  dovecot:
+  bind9:

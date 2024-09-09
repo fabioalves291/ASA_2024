@@ -1,0 +1,4 @@
+driver = mysql
+connect = host=db-postfixadmin dbname=postfixadmin user=postfixuser password=postfixpassword
+default_pass_scheme = MD5
+password_query = SELECT email AS user, password FROM mailbox WHERE email='%u';
