@@ -20,6 +20,6 @@ ns.jfabio.asa.br.  IN CNAME ns1
 proxy.jfabio.asa.br.  IN CNAME ns1
 www.jfabio.asa.br.  IN CNAME ns1
 mail.jfabio.asa.br.  IN CNAME ns1
-wordpress.jfabio.asa.br IN CNAME ns1
-web.jfabio.asa.br IN CNAME ns1
+wordpress.jfabio.asa.br. IN CNAME ns1
+web.jfabio.asa.br. IN CNAME ns1
 
