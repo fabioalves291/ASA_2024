@@ -53,7 +53,7 @@ services:
       - app-network
 
   postfix:
-    image: catatnight/postfix
+    image: mailcow/postfix
     container_name: postfix
     ports:
       - "25:25"
@@ -66,8 +66,8 @@ services:
       - smtpd_use_tls=yes
       - smtpd_tls_cert_file=/etc/ssl/certs/postfix.pem
       - smtpd_tls_key_file=/etc/ssl/private/postfix.key
-    volumes:
-      - ./postfix:/etc/postfix
+    #volumes:
+      #- ./postfix:/etc/postfix
       #- ./postfix/ssl:/etc/ssl/certs
       #- ./postfix/ssl:/etc/ssl/private
     networks:

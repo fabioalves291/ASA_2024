@@ -34,7 +34,7 @@ smtpd_tls_security_level = may
 # information on enabling SSL in the smtp client.
 
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-myhostname = 
+myhostname = mail.jfabio.asa.br
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 mydestination = dd40882ba0ea, localhost.localdomain, , localhost, jfabio.asa.br, mail.jfabio.asa.br, ,
