@@ -1,0 +1,8 @@
+docker run -it --name mail  -p 25:25 -p 143:143 -p 110:110 -p 993:993 -p 587:587 -p 994:994 ubuntu
+
+
+mail_location = maildir:~/Maildir
+#mail_location = maildir:/Maildir
+home_mailbox = Maildir/
+
+apt-get install -y postfix dovecot-core dovecot-imapd dovecot-pop3d dovecot-sieve dovecot-mysql dovecot-ldap

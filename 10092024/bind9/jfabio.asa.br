@@ -3,7 +3,7 @@
 ; BIND data file for example.com
 ;
 $TTL    604800
-@       IN      SOA     ns1.jfabio.asa.br. admin.example.com. (
+@       IN      SOA     ns1.jfabio.asa.br. admin.fabio.asa.br. (
                         2024071801      ; Serial
                          604800         ; Refresh
                           86400         ; Retry
@@ -14,9 +14,9 @@ $TTL    604800
 @       IN      NS      ns1.jfabio.asa.br.
 
 ; A e AAAA records
-@       IN      A       127.0.0.1
-@       IN      AAAA    ::1
-ns1     IN      A       127.0.0.1
+@       IN      A       192.168.0.2
+;@       IN      AAAA    ::1
+ns1     IN      A       192.168.0.2
 
 ; CNAMEs
 www     IN      CNAME   ns1
@@ -28,4 +28,6 @@ web     IN      CNAME   ns1
 @       IN      MX      10 mail.jfabio.asa.br.
 
 ; Apontando o servidor de e-mail para o IP correto
-mail    IN      A       127.0.0.1  ; Aqui deve ser o IP real do seu servidor de e-mail
+mail    IN      A       192.168.0.2  ; Aqui deve ser o IP real do seu servidor de e-mail
+smtp    IN      A       192.168.0.2
+imap    IN      A       192.168.0.2

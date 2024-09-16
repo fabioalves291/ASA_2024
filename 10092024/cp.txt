@@ -1,0 +1,21 @@
+docker cp mail:/etc/postfix ./mail
+docker cp mail:/etc/dovecot ./mail
+
+ail:
+    build:
+      context: ./mail/
+      dockerfile: Dockerfile
+    restart: always
+    container_name: mail
+    ports:
+      - "110:110"   # pop
+      - "143:143"   # imap
+      - "993:993"   # imaps
+      - "994:994"
+      - "25:25"     # smtp
+      - "587:587"   # smtps
+    networks:
+      - app-network
+    volumes:
+      - ./mail/dovecot:/etc
+      - ./mail/postfix:/etc
